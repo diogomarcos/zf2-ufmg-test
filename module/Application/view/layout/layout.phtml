@@ -39,6 +39,19 @@
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="<?php echo $this->url('home') ?>"><?php echo $this->translate('Home') ?></a></li>
+                        <li><a href="<?php echo $this->url('article') ?>"><?php echo $this->translate('Notícias') ?></a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><?php echo $this->message ?> <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <?php if (\Application\Controller\LoginController::getSession()->offsetExists('access_token')) { ?>
+                                <li><a href="<?php echo $this->url('logoff') ?>">Logoff</a></li>
+                                <?php } else {?>
+                                <li><a href="<?php echo $this->url('login') ?>">Login</a></li>
+                                <?php }?>
+                            </ul>
+                        </li>
                     </ul>
                 </div><!--/.nav-collapse -->
             </div>

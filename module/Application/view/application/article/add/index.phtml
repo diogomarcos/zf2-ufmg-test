@@ -1,0 +1,38 @@
+<div class="jumbotron">
+    <h1>Cadastrar Notícia</h1>
+    <?php echo $this->partial('flash-message'); ?>
+
+    <?php
+    $form = $this->addArticleForm;
+    $form->prepare();
+    echo $this->form()->openTag($form);
+    ?>
+    <table>
+        <tr>
+            <td><?php echo $this->formlabel($form->get('title'));?></td>
+            <td><?php echo $this->formElement($form->get('title')); ?>
+                <span class="common-error-msg"><?php echo $this->formElementErrors($form->get('title'));?></span></td>
+        </tr>
+        <tr>
+            <td><?php echo $this->formlabel($form->get('subtitle'));?></td>
+            <td><?php echo $this->formElement($form->get('subtitle')); ?>
+                <span class="common-error-msg"><?php echo $this->formElementErrors($form->get('subtitle'));?></span></td>
+        </tr>
+        <tr>
+            <td><?php echo $this->formlabel($form->get('text'));?></td>
+            <td><?php echo $this->formElement($form->get('text')); ?>
+                <span class="common-error-msg"><?php echo $this->formElementErrors($form->get('text'));?></span></td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>
+                <?php
+                echo $this->formElement($form->get('submit'));
+                ?>
+            </td>
+        </tr>
+    </table>
+    <?php
+    echo $this->form()->closeTag($form);
+    ?>
+</div>

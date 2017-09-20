@@ -52,6 +52,53 @@ return array(
                     ),
                 ),
             ),
+            'login' => array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route' => '/login',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller'    => 'Login',
+                        'action'        => 'index',
+                    ),
+                ),
+            ),
+            'logoff' => array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route' => '/logoff',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller'    => 'Login',
+                        'action'        => 'logout',
+                    ),
+                ),
+            ),
+            'article' => array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route' => '/article',
+                    'constraints' => array(
+                        'action'  =>  '[a-zA-Z][a-zA-Z0-9_-]*',
+                    ),
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller'    => 'Article',
+                        'action'        => 'index',
+                    ),
+                ),
+            ),
+            'add_article' => array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route' => '/article/add',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller'    => 'Article',
+                        'action'        => 'add',
+                    ),
+                ),
+            ),
         ),
     ),
     'service_manager' => array(
@@ -75,7 +122,9 @@ return array(
     ),
     'controllers' => array(
         'invokables' => array(
-            'Application\Controller\Index' => Controller\IndexController::class
+            'Application\Controller\Index' => Controller\IndexController::class,
+            'Application\Controller\Login' => Controller\LoginController::class,
+            'Application\Controller\Article' => Controller\ArticleController::class,
         ),
     ),
     'view_manager' => array(
@@ -89,6 +138,10 @@ return array(
             'application/index/index' => __DIR__ . '/../view/application/index/index.phtml',
             'error/404'               => __DIR__ . '/../view/error/404.phtml',
             'error/index'             => __DIR__ . '/../view/error/index.phtml',
+            'application/login/index' => __DIR__ . '/../view/application/login/index.phtml',
+            'flash-message'           => __DIR__ . '/../view/partial/flash-message.phtml',
+            'application/article/index' => __DIR__ . '/../view/application/article/index.phtml',
+            'application/article/add/index' => __DIR__ . '/../view/application/article/add/index.phtml',
         ),
         'template_path_stack' => array(
             __DIR__ . '/../view',

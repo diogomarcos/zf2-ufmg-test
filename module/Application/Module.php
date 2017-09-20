@@ -9,8 +9,12 @@
 
 namespace Application;
 
+use Application\Controller\LoginController;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
+use Zend\Http\Client as HttpClient;
+use Application\HttpRestJson\Client as HttpRestJsonClient;
+use Zend\Session\Container;
 
 class Module
 {
@@ -19,6 +23,58 @@ class Module
         $eventManager        = $e->getApplication()->getEventManager();
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
+
+        $serviceManager = $e->getApplication()->getServiceManager();
+
+        $eventManager->attach(MvcEvent::EVENT_DISPATCH, array(
+            $this,
+            'boforeDispatch'
+        ), 100);
+        $eventManager->attach(MvcEvent::EVENT_DISPATCH, array(
+            $this,
+            'afterDispatch'
+        ), -100);
+    }
+
+    public function boforeDispatch(MvcEvent $event){
+
+        $request = $event->getRequest();
+        $response = $event->getResponse();
+        $target = $event->getTarget ();
+
+        /* Offline pages not needed authentication */
+        $whiteList = array (
+            'Users\Controller\Login-index'
+        );
+
+        $requestUri = $request->getRequestUri();
+        $controller = $event->getRouteMatch ()->getParam ( 'controller' );
+        $action = $event->getRouteMatch ()->getParam ( 'action' );
+
+        $requestedResourse = $controller . "-" . $action;
+
+        //ver aqui
+        if (LoginController::getSession()->offsetExists( 'access_token' )) {
+            if ($requestedResourse === 'Application\Controller\Login-index' || in_array ($requestedResourse, $whiteList, true)) {
+                $url = '/application/index';
+                $response->setHeaders ( $response->getHeaders ()->addHeaderLine ( 'Location', $url ) );
+                $response->setStatusCode ( 302 );
+            }
+        }else{
+
+            if ($requestedResourse !== 'Application\Controller\Login-index' && ! in_array ($requestedResourse, $whiteList, true)) {
+                $url = '/application/login';
+                $response->setHeaders ( $response->getHeaders ()->addHeaderLine ( 'Location', $url ) );
+                $response->setStatusCode ( 302 );
+            }
+            $response->sendHeaders ();
+        }
+
+        //print "Called before any controller action called. Do any operation.";
+    }
+
+    public function afterDispatch(MvcEvent $event){
+        //print "Called after any controller action called. Do any operation.";
     }
 
     public function getConfig()

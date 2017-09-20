@@ -1,0 +1,23 @@
+<?php
+$flashMessage = $this->flashMessenger()->getMessages();
+if (count($flashMessage)) :
+    ?>
+    <div class="row">
+    <ul>
+        <?php
+        foreach ($flashMessage as $msg) :
+            foreach ($msg as $type => $message) :
+                ?>
+                <li><span class="<?php echo $type; ?>"><?php echo $message; ?></span></li>
+            <?php endforeach; ?>
+        <?php endforeach; ?>
+    </ul>
+<?php endif; ?>
+<?php if(isset($this->messages)) : ?>
+    <ul>
+        <?php foreach ($this->messages as $type => $msg) : ?>
+            <li><span class="<?php echo $type; ?>"><?php echo $msg; ?></span></li>
+        <?php endforeach; ?>
+    </ul>
+    </div>
+<?php endif; ?>

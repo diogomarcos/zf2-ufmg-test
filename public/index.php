@@ -17,5 +17,7 @@ if (php_sapi_name() === 'cli-server') {
 // Setup autoloading
 require 'init_autoloader.php';
 
+error_reporting ( E_ALL & ~ E_DEPRECATED & ~ E_USER_DEPRECATED & ~ E_STRICT );
+
 // Run the application!
 Zend\Mvc\Application::init(require 'config/application.config.php')->run();

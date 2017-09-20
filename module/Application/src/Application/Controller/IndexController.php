@@ -9,6 +9,7 @@
 
 namespace Application\Controller;
 
+use Application\HttpRestJson\WebService;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
@@ -16,6 +17,15 @@ class IndexController extends AbstractActionController
 {
     public function indexAction()
     {
+
+        $message = 'Olá Visitante';
+
+        $web_service = WebService::account();
+        if($web_service) {
+            $message = 'Olá ' . $web_service['name'] . ' (' . $web_service['email'] . ')';
+        }
+        $this->layout()->setVariable('message' , $message);
+
         return new ViewModel();
     }
 }
