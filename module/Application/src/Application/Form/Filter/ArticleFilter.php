@@ -1,9 +1,9 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: diogo
- * Date: 20/09/2017
- * Time: 02:52
+ * ArticleFilter
+ *
+ * @author  Diogo Marcos <contato@diogomarcos.com>
+ * @version 1.0
  */
 
 namespace Application\Form\Filter;
@@ -12,9 +12,13 @@ namespace Application\Form\Filter;
 use Zend\InputFilter\InputFilter;
 use Zend\Validator\NotEmpty;
 
-class AddArticleFilter extends InputFilter
+class ArticleFilter extends InputFilter
 {
-    public function __construct(){
+    /**
+     * ArticleFilter constructor.
+     */
+    public function __construct()
+    {
 
         $isEmpty = NotEmpty::IS_EMPTY;
 
@@ -70,7 +74,7 @@ class AddArticleFilter extends InputFilter
                     'name' => 'NotEmpty',
                     'options' => array(
                         'messages' => array(
-                            $isEmpty => 'O subtítulo não pode estar vazio.'
+                            $isEmpty => 'O texto não pode estar vazio.'
                         )
                     ),
                     'break_chain_on_failure' => true

@@ -75,27 +75,17 @@ return array(
                 ),
             ),
             'article' => array(
-                'type' => 'Literal',
+                'type' => 'Segment',
                 'options' => array(
-                    'route' => '/article',
+                    'route' => '/article[/:action][/:id]',
                     'constraints' => array(
                         'action'  =>  '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id' => '[0-9]+',
                     ),
                     'defaults' => array(
                         '__NAMESPACE__' => 'Application\Controller',
                         'controller'    => 'Article',
                         'action'        => 'index',
-                    ),
-                ),
-            ),
-            'add_article' => array(
-                'type' => 'Literal',
-                'options' => array(
-                    'route' => '/article/add',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Application\Controller',
-                        'controller'    => 'Article',
-                        'action'        => 'add',
                     ),
                 ),
             ),
@@ -141,7 +131,10 @@ return array(
             'application/login/index' => __DIR__ . '/../view/application/login/index.phtml',
             'flash-message'           => __DIR__ . '/../view/partial/flash-message.phtml',
             'application/article/index' => __DIR__ . '/../view/application/article/index.phtml',
-            'application/article/add/index' => __DIR__ . '/../view/application/article/add/index.phtml',
+            'application/article/add' => __DIR__ . '/../view/application/article/add/index.phtml',
+            'pager'           => __DIR__ . '/../view/partial/pager.phtml',
+            'application/article/edit' => __DIR__ . '/../view/application/article/edit/index.phtml',
+            'application/article/view' => __DIR__ . '/../view/application/article/view/index.phtml',
         ),
         'template_path_stack' => array(
             __DIR__ . '/../view',

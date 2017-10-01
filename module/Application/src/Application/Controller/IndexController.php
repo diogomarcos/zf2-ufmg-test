@@ -1,10 +1,9 @@
 <?php
 /**
- * Zend Framework (http://framework.zend.com/)
+ * IndexController
  *
- * @link      http://github.com/zendframework/ZendSkeletonApplication for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @author  Diogo Marcos <contato@diogomarcos.com>
+ * @version 1.0
  */
 
 namespace Application\Controller;
@@ -15,16 +14,24 @@ use Zend\View\Model\ViewModel;
 
 class IndexController extends AbstractActionController
 {
+    /**
+     * indexAction: Página Inícial
+     *
+     * @return ViewModel
+     *
+     * @throws \Zend\Session\Exception\InvalidArgumentException
+     * @throws \Zend\Http\Exception\InvalidArgumentException
+     */
     public function indexAction()
     {
 
         $message = 'Olá Visitante';
 
         $web_service = WebService::account();
-        if($web_service) {
+        if ($web_service) {
             $message = 'Olá ' . $web_service['name'] . ' (' . $web_service['email'] . ')';
         }
-        $this->layout()->setVariable('message' , $message);
+        $this->layout()->setVariable('message', $message);
 
         return new ViewModel();
     }

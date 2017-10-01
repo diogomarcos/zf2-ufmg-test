@@ -1,0 +1,113 @@
+<?php if ($total): ?>
+    <nav>
+        <ul class="pagination">
+            <?php
+            $adjacent = 3;
+            $total_pages = ceil($total/$page_size);
+            $current_page=1;
+            if (isset($_GET['page'])) {
+                $current_page = $_GET['page'];
+            }
+
+            if ($current_page!=1) {
+                $previous_page = $current_page - 1;
+            ?>
+                <li class="page-item">
+                    <a class="page-link" href="<?=$this->basePath()?>/article?page=<?=$previous_page?>" tabindex="-1">Anterior</a>
+                </li>
+            <?php
+            }
+
+            if ($total_pages < 7 + ($adjacent * 2)) {
+
+                for ($i = 1; $i <= $total_pages; $i++) {
+            ?>
+                    <li class="page-item <?php if ($i == $current_page) {echo 'active';} else  {echo 'noactive';}?>">
+                        <a class="page-link" href="<?= $this->basePath() ?>/article?page=<?= $i ?>"><?= $i ?></a>
+                    </li>
+            <?php
+                }
+            } elseif ($total_pages > 5 + ($adjacent * 2)) {
+                if ($current_page < 1 + ($adjacent * 2)) {
+                    for ($i = 1; $i < 4 + ($adjacent * 2); $i++) {
+            ?>
+                        <li class="page-item <?php if ($i == $current_page) {echo 'active';} else  {echo 'noactive';}?>">
+                            <a class="page-link" href="<?= $this->basePath() ?>/article?page=<?= $i ?>"><?= $i ?></a>
+                        </li>
+            <?php
+                    }
+            ?>
+                        <li class="page-item">
+                            <a class="page-link">...</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="<?= $this->basePath() ?>/article?page=<?= ($total_pages-1) ?>"><?= ($total_pages-1) ?></a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="<?= $this->basePath() ?>/article?page=<?= $total_pages ?>"><?= $total_pages ?></a>
+                        </li>
+            <?php
+                } elseif($total_pages - ($adjacent * 2) > $current_page && $current_page > ($adjacent * 2)) {
+            ?>
+                   <li class="page-item">
+                       <a class="page-link" href="<?= $this->basePath() ?>/article?page=1">1</a>
+                   </li>
+                   <li class="page-item">
+                        <a class="page-link" href="<?= $this->basePath() ?>/article?page=2">2</a>
+                   </li>
+                   <li class="page-item">
+                       <a class="page-link">...</a>
+                   </li>
+            <?php
+                    for ($i = $current_page - $adjacent; $i <= $current_page + $adjacent; $i++) {
+            ?>
+                        <li class="page-item <?php if ($i == $current_page) {echo 'active';} else  {echo 'noactive';}?>">
+                            <a class="page-link" href="<?= $this->basePath() ?>/article?page=<?= $i ?>"><?= $i ?></a>
+                        </li>
+            <?php
+                    }
+            ?>
+                    <li class="page-item">
+                        <a class="page-link">...</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="<?= $this->basePath() ?>/article?page=<?= ($total_pages-1) ?>"><?= ($total_pages-1) ?></a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="<?= $this->basePath() ?>/article?page=<?= $total_pages ?>"><?= $total_pages ?></a>
+                    </li>
+            <?php
+                } else {
+            ?>
+                    <li class="page-item">
+                        <a class="page-link" href="<?= $this->basePath() ?>/article?page=1">1</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="<?= $this->basePath() ?>/article?page=2">2</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link">...</a>
+                    </li>
+            <?php
+                    for ($i = $total_pages - (2 + ($adjacent * 2)); $i <= $total_pages; $i++) {
+            ?>
+                        <li class="page-item <?php if ($i == $current_page) {echo 'active';} else  {echo 'noactive';}?>">
+                            <a class="page-link" href="<?= $this->basePath() ?>/article?page=<?= $i ?>"><?= $i ?></a>
+                        </li>
+            <?php
+                    }
+                }
+            }
+
+            if ($current_page!=$total_pages) {
+                $next_page = $current_page + 1;
+            ?>
+                <li class="page-item">
+                    <a class="page-link" href="<?=$this->basePath()?>/article?page=<?=$next_page?>">Próximo</a>
+                </li>
+            <?php
+            }
+            ?>
+        </ul>
+    </nav>
+<?php endif; ?>

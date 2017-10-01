@@ -1,34 +1,27 @@
 <div class="jumbotron">
     <h1>Listagem de Notícias</h1>
-    <?php
-    $flash=$this->flashMessenger()
-        ->setMessageOpenFormat('<div%s>')
-        ->setMessageSeparatorString('')
-        ->setMessageCloseString('</div>');
-    ?>
+    <?php echo $this->partial('flash-message'); ?>
     <table class="table">
         <tr>
-            <td colspan="7">
+            <td colspan="4">
                 <a class="btn btn-success" href="<?=$this->basePath()?>/article/add">Adicionar</a>
-                <?php echo $flash->render('add',array('btn', 'btn-success'));?>
-                <?php echo $flash->render('del',array('btn', 'btn-success'));?>
             </td>
         </tr>
         <tr>
             <th>ID</th>
             <th>Título</th>
-            <th>Subtítulo</th>
             <th>Ver</th>
             <th>Modificar</th>
-            <th>Eliminar</th>
         </tr>
         <?php foreach($articles as $article){ ?>
             <tr style="background-color:<?php echo $this->cycle(array("#F0F0F0","#FFFFFF"))->next()?>">
                 <td><?=$article['id']?></td>
-                <td><?=$article['subtitle']?></td>
-                <td><a class="btn btn-success" href="<?=$this->basePath()?>/article/view/<?=$article["id"]?>">Ver</a></td>
-                <td><a class="btn btn-primary" href="<?=$this->basePath()?>/article/edit/<?=$article["id"]?>">Modificar</a></td>
+                <td><?=$article['title']?></td>
+                <td><a class="btn btn-success" href="<?=$this->basePath()?>/article/view/<?=$article['id']?>">Ver</a></td>
+                <td><a class="btn btn-primary" href="<?=$this->basePath()?>/article/edit/<?=$article['id']?>">Modificar</a></td>
             </tr>
         <?php } ?>
     </table>
+
+    <?php echo $this->partial('pager'); ?>
 </div>

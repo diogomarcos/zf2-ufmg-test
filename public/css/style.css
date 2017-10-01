@@ -35,3 +35,25 @@ div.container a.brand {
     margin-left: 0;
     padding: 8px 20px 12px 40px;
 }
+
+li{
+    list-style: none;
+}
+
+.success{
+    background: green;
+    color: #FFFFFF;
+    padding:5px;
+}
+
+.error{
+    background: red;
+    color: #FFFFFF;
+    padding:5px;
+}
+
+.info{
+    background: blue;
+    color: #FFFFFF;
+    padding:5px;
+}

@@ -10,12 +10,15 @@
 namespace Application\Form\Filter;
 
 use Zend\InputFilter\InputFilter;
-use Zend\Validator\EmailAddress;
 use Zend\Validator\NotEmpty;
 
 class LoginFilter extends InputFilter
 {
-    public function __construct(){
+    /**
+     * LoginFilter constructor.
+     */
+    public function __construct()
+    {
 
         $isEmpty = NotEmpty::IS_EMPTY;
 

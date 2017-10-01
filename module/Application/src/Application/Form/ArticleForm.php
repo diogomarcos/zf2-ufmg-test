@@ -1,24 +1,29 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: diogo
- * Date: 20/09/2017
- * Time: 02:50
+ * ArticleForm
+ *
+ * @author  Diogo Marcos <contato@diogomarcos.com>
+ * @version 1.0
  */
 
 namespace Application\Form;
 
 
-use Application\Form\Filter\AddArticleFilter;
+use Application\Form\Filter\ArticleFilter;
 use Zend\Form\Form;
 
-class AddArticleForm extends Form
+class ArticleForm extends Form
 {
+    /**
+     * ArticleForm constructor.
+     *
+     * @param int|null|string $name
+     */
     public function __construct($name)
     {
         parent::__construct($name);
 
-        $this->setInputFilter(new AddArticleFilter());
+        $this->setInputFilter(new ArticleFilter());
 
         $this->setAttribute('method', 'post');
 
@@ -27,8 +32,10 @@ class AddArticleForm extends Form
             'type' => 'text',
             'options' => array(
                 'label' => 'Título',
-                'id' => 'username',
-                'required'=>'required'
+                'required' => 'required'
+            ),
+            'attributes' => array(
+                'size' => 60,
             )
         ));
 
@@ -37,31 +44,29 @@ class AddArticleForm extends Form
             'type' => 'text',
             'options' => array(
                 'label' => 'Subtítulo',
-                'id' => 'username',
-                'required'=>'required'
+                'required' => 'required'
+            ),
+            'attributes' => array(
+                'size' => 60,
             )
         ));
 
         $this->add(array(
             'name' => 'text',
-            'type' => 'text',
+            'type' => 'textarea',
             'options' => array(
                 'label' => 'Texto',
-                'id' => 'username',
-                'required'=>'required'
-            )
-        ));
-
-        $this->add(array(
-            'name' => 'password',
-            'options' => array(
-                'label' => 'Contraseña: ',
+                'required' => 'required',
+                'label_attributes' => array(
+                    'class' => 'control-label'
+                ),
             ),
             'attributes' => array(
-                'type' => 'password',
-                'class' => 'input form-control',
-                'required'=>'required'
-            )
+                'id' => 'editor',
+                'class' => 'form-control',
+                'cols' => 62,
+                'rows' => 15
+            ),
         ));
 
         $this->add(array(

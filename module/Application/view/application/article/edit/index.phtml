@@ -1,9 +1,9 @@
 <div class="jumbotron">
-    <h1>Cadastrar Notícia</h1>
+    <h1>Editar Notícia</h1>
     <?php echo $this->partial('flash-message'); ?>
 
     <?php
-    $form = $this->addArticleForm;
+    $form = $this->editArticleForm;
     $form->prepare();
     echo $this->form()->openTag($form);
     ?>

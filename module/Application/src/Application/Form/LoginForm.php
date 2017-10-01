@@ -9,12 +9,17 @@
 namespace Application\Form;
 
 
-use Zend\Form\Element;
 use Zend\Form\Form;
 
 class LoginForm extends Form
 {
-    public function __construct($name) {
+    /**
+     * LoginForm constructor.
+     *
+     * @param int|null|string $name
+     */
+    public function __construct($name)
+    {
 
         parent::__construct($name);
         $this->setAttribute('method', 'post');
@@ -44,6 +49,7 @@ class LoginForm extends Form
             'attributes' => array(
                 'type' => 'submit',
                 'value' => 'Entrar',
+                'class' => 'btn btn-success'
             ),
         ));
     }

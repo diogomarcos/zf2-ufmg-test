@@ -53,7 +53,7 @@ class Module
 
         $requestedResourse = $controller . "-" . $action;
 
-        //ver aqui
+        //Responsavel parar realizar o login no sistema
         if (LoginController::getSession()->offsetExists( 'access_token' )) {
             if ($requestedResourse === 'Application\Controller\Login-index' || in_array ($requestedResourse, $whiteList, true)) {
                 $url = '/application/index';

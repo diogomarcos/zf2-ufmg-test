@@ -1,0 +1,9 @@
+<div class="jumbotron">
+    <h1><?=$article['title']?></h1>
+    <h2><?=$article['subtitle']?></h2>
+    <div><?=$article['text']?></div>
+    <div>
+        <a class="btn btn-primary" href="<?=$_SERVER['HTTP_REFERER']?>">Voltar</a>
+        <a class="btn btn-success" href="<?=$this->basePath()?>/article/edit/<?=$article['id']?>">Editar</a>
+    </div>
+</div>

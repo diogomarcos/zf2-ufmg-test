@@ -10,35 +10,43 @@ namespace Application\Controller;
 
 use Application\Form\Filter\LoginFilter;
 use Application\Form\LoginForm;
-use Application\HttpRestJson\Client;
 use Application\HttpRestJson\WebService;
-use Application\Util\Authentication;
-use Zend\Http\Client\Adapter\Curl;
-use Zend\Http\Request;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\Session\Container;
-use Zend\Stdlib\Parameters;
 use Zend\View\Model\ViewModel;
-use Zend\Http\Client as HttpClient;
 
 class LoginController extends AbstractActionController
 {
     protected static $session = null;
 
-    const URL_AUTHENTICATE = 'authenticate';
-    const URL_ACCOUNT = 'account';
-    const URL_NEWS = 'news';
-
+    /**
+     * getSession: Retorna a sessão
+     *
+     * @return null|Container
+     *
+     * @throws \Zend\Session\Exception\InvalidArgumentException
+     */
     public static function getSession()
     {
-        if(self::$session === null) {
+        if (self::$session === null) {
             self::$session = new Container('User');
         }
         return self::$session;
     }
+
+    /**
+     * indexAction: Realizar o login no sistema
+     *
+     * @return \Zend\Http\Response|ViewModel
+     *
+     * @throws \Zend\Http\Exception\InvalidArgumentException
+     * @throws \Zend\Session\Exception\InvalidArgumentException
+     * @throws \Zend\Form\Exception\DomainException
+     * @throws \Zend\Form\Exception\InvalidArgumentException
+     */
     public function indexAction()
     {
-        $this->layout()->setVariable('message' , 'Olá Visitante');
+        $this->layout()->setVariable('message', 'Olá Visitante');
 
         $request = $this->getRequest();
 
@@ -46,20 +54,20 @@ class LoginController extends AbstractActionController
         $login_form = new LoginForm('loginForm');
         $login_form->setInputFilter(new LoginFilter());
 
-        if($request->isPost()){
+        if ($request->isPost()) {
             $form_data = $request->getPost();
             $login_form->setData($form_data);
 
-            if($login_form->isValid()) {
+            if ($login_form->isValid()) {
                 $form_data = $login_form->getData();
                 $web_service = WebService::authenticate($form_data);
 
-                if(is_array($web_service) && !empty($web_service)){
+                if (is_array($web_service) && !empty($web_service)) {
                     if (array_key_exists('status', $web_service)) {
-                        $this->flashMessenger()->addMessage(array('error' => 'invalid credentials.'));
+                        $this->flashMessenger()->addMessage(array('error' => 'Usuário ou Senha incorretos.'));
                     } elseif (array_key_exists('access_token', $web_service)) {
                         self::getSession()->offsetSet('access_token', $web_service['access_token']);
-                        $this->flashMessenger()->addMessage(array('success' => 'Login Success.'));
+                        $this->flashMessenger()->addMessage(array('success' => 'Login realizado com sucesso.'));
                     }
                 }
 
@@ -72,7 +80,15 @@ class LoginController extends AbstractActionController
         return $view;
     }
 
-    public function logoutAction(){
+    /**
+     * logoutAction: Sair do sistema
+     *
+     * @return \Zend\Http\Response
+     *
+     * @throws \Zend\Session\Exception\InvalidArgumentException
+     */
+    public function logoutAction()
+    {
         self::getSession()->getManager()->destroy();
         return $this->redirect()->toUrl('/application/login');
     }
