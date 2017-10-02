@@ -64,6 +64,11 @@ o comando abaixo para executar a aplicação:
         Usuário: 'será disponibilizado em breve'
         Senha:   'será disponibilizado em breve'
 
+### Considerações Complementares
+1. Para ter acesso ao review online da aplicação, basta utilizar o endereço abaixo:
+
+        https://zf2-ufmg-test.herokuapp.com/
+
 ### Resultado do Desenvolvimento
 Abaixo estão disponibilizados as telas da aplicação:
 
