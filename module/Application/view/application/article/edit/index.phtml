@@ -32,6 +32,8 @@
         </tr>
     </table>
     <?php
+    echo $this->form()->closeTag($form);
+
     $this->QuCKEditor(
         'editor',
         array('width' => "100%",
@@ -39,6 +41,5 @@
             'uiColor' => '#FFFFFF',
         )
     );
-    echo $this->form()->closeTag($form);
     ?>
 </div>
