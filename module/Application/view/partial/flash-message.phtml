@@ -3,28 +3,24 @@
     $flashMessage = $this->flashMessenger()->getMessages();
 
     if (count($flashMessage)) :
-        ?>
-        <ul>
-            <?php
-            foreach ($flashMessage as $msg) :
-                foreach ($msg as $type => $message) :
-                    ?>
-                    <div class="alert alert-<?php echo $type; ?> alert-dismissible" role="alert">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <?php echo $message; ?>
-                    </div>
-                <?php endforeach; ?>
-            <?php endforeach; ?>
-        </ul>
-    <?php endif; ?>
-    <?php if(isset($this->messages)) : ?>
-        <ul>
-            <?php foreach ($this->messages as $type => $msg) : ?>
+        foreach ($flashMessage as $msg) :
+            foreach ($msg as $type => $message) :
+            ?>
                 <div class="alert alert-<?php echo $type; ?> alert-dismissible" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <?php echo $msg; ?>
+                    <span class="glyphicon glyphicon-info-sign"></span>&nbsp;
+                    <?php echo $message; ?>
                 </div>
             <?php endforeach; ?>
-        </ul>
+        <?php endforeach; ?>
+    <?php endif; ?>
+    <?php if(isset($this->messages)) : ?>
+        <?php foreach ($this->messages as $type => $msg) : ?>
+            <div class="alert alert-<?php echo $type; ?> alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <span class="glyphicon glyphicon-info-sign"></span>&nbsp;
+                <?php echo $msg; ?>
+            </div>
+        <?php endforeach; ?>
     <?php endif; ?>
 </div>
