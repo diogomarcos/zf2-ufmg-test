@@ -1,5 +1,6 @@
-<div class="jumbotron">
-    <h1>Login</h1>
+<div class="form-login">
+    <h2 class="form-login-heading">Login</h2>
+    <hr>
 <?php echo $this->partial('flash-message'); ?>
 
 <?php
@@ -7,26 +8,20 @@ $form = $this->loginForm;
 $form->prepare();
 echo $this->form()->openTag($form);
 ?>
-    <table>
-        <tr>
-            <td><?php echo $this->formlabel($form->get('username'));?></td>
-            <td><?php echo $this->formElement($form->get('username')); ?>
-                <span class="common-error-msg"><?php echo $this->formElementErrors($form->get('username'));?></span></td>
-        </tr>
-        <tr>
-            <td><?php echo $this->formlabel($form->get('password'));?></td>
-            <td><?php echo $this->formElement($form->get('password')); ?>
-                <span class="common-error-msg"><?php echo $this->formElementErrors($form->get('password'));?></span></td>
-        </tr>
-        <tr>
-            <td>&nbsp;</td>
-            <td>
-                <?php
-                echo $this->formElement($form->get('submit'));
-                ?>
-            </td>
-        </tr>
-    </table>
+    <div class="form-group">
+        <?php echo $this->formElement($form->get('username')); ?>
+        <span class="common-error-msg"><?php echo $this->formElementErrors($form->get('username'));?></span>
+    </div>
+    <div class="form-group">
+        <?php echo $this->formElement($form->get('password')); ?>
+        <span class="common-error-msg"><?php echo $this->formElementErrors($form->get('password'));?></span>
+    </div>
+    <hr/>
+    <div class="form-group">
+        <button type="submit" class="btn btn-default" name="btn-login" id="btn-login">
+            <span class="glyphicon glyphicon-log-in"></span> &nbsp; Entrar
+        </button>
+    </div>
 <?php
 echo $this->form()->closeTag($form);
 ?>

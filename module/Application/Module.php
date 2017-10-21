@@ -56,14 +56,14 @@ class Module
         //Responsavel parar realizar o login no sistema
         if (LoginController::getSession()->offsetExists( 'access_token' )) {
             if ($requestedResourse === 'Application\Controller\Login-index' || in_array ($requestedResourse, $whiteList, true)) {
-                $url = '/application/index';
+                $url = '/';
                 $response->setHeaders ( $response->getHeaders ()->addHeaderLine ( 'Location', $url ) );
                 $response->setStatusCode ( 302 );
             }
         }else{
 
             if ($requestedResourse !== 'Application\Controller\Login-index' && ! in_array ($requestedResourse, $whiteList, true)) {
-                $url = '/application/login';
+                $url = '/login';
                 $response->setHeaders ( $response->getHeaders ()->addHeaderLine ( 'Location', $url ) );
                 $response->setStatusCode ( 302 );
             }

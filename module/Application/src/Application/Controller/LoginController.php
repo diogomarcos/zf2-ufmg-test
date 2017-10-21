@@ -64,7 +64,7 @@ class LoginController extends AbstractActionController
 
                 if (is_array($web_service) && !empty($web_service)) {
                     if (array_key_exists('status', $web_service)) {
-                        $this->flashMessenger()->addMessage(array('error' => 'Usuário ou Senha incorretos.'));
+                        $this->flashMessenger()->addMessage(array('danger' => 'Usuário ou Senha incorretos.'));
                     } elseif (array_key_exists('access_token', $web_service)) {
                         self::getSession()->offsetSet('access_token', $web_service['access_token']);
                         $this->flashMessenger()->addMessage(array('success' => 'Login realizado com sucesso.'));
@@ -72,11 +72,12 @@ class LoginController extends AbstractActionController
                 }
 
 
-                return $this->redirect()->toUrl('/application/login');
+                return $this->redirect()->toUrl('/login');
             }
         }
 
         $view->setVariable('loginForm', $login_form);
+        $this->layout()->setTemplate('layout/custom');
         return $view;
     }
 
@@ -90,6 +91,6 @@ class LoginController extends AbstractActionController
     public function logoutAction()
     {
         self::getSession()->getManager()->destroy();
-        return $this->redirect()->toUrl('/application/login');
+        return $this->redirect()->toUrl('/login');
     }
 }

@@ -28,20 +28,26 @@ class LoginForm extends Form
             'name' => 'username',
             'type' => 'text',
             'options' => array(
-                'label' => 'Usuário',
+                'label' => 'Usuário'
+            ),
+            'attributes' => array(
                 'id' => 'username',
-                'placeholder' => 'example@example'
-            )
+                'placeholder' => 'Usuário',
+                'class' => 'form-control'
+            ),
         ));
 
         $this->add(array(
             'name' => 'password',
             'type' => 'password',
             'options' => array(
-                'label' => 'Senha',
+                'label' => 'Senha'
+            ),
+            'attributes' => array(
                 'id' => 'password',
-                'placeholder' => '**********'
-            )
+                'placeholder' => 'Senha',
+                'class' => 'form-control'
+            ),
         ));
 
         $this->add(array(

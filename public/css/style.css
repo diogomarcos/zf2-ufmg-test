@@ -3,7 +3,11 @@
 }
 
 body {
-    padding-top:50px;
+    padding-top:60px;
+}
+
+body.custom-background {
+    background: #F1F9F9;
 }
 
 footer {
@@ -108,3 +112,33 @@ a,a:hover {
 .btn-twitter:hover {background-color:#3088FF;color:#62BBFF;}
 .btn-facebook:hover {background-color:#2A4998;color:#4C6BBA;}
 .btn-google-plus:hover {background-color:#C23836;color:#E45A58;}
+
+.form-login {
+    margin: 0 auto;
+    padding: 19px 29px 29px;
+    background-color: #FFFFFF;
+    color: #990000;
+    border: 1px solid #E5E5E5;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    box-shadow: 0 1px 2px rgba(0,0,0,.05);
+    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+    -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+    font-family: Tahoma, Geneva, sans-serif;
+    font-weight: lighter;
+    max-width: 500px;
+}
+
+.form-login .form-login-heading {
+    color: #00A2D1;
+    text-align: center;
+}
+
+.form-login input[type="text"],
+.form-login input[type="password"],
+.form-login input[type="email"] {
+    height: 45px;
+    padding: 7px 9px;
+    font-size: 16px;
+}
