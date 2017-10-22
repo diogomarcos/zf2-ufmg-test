@@ -36,6 +36,8 @@ class ArticleForm extends Form
             ),
             'attributes' => array(
                 'size' => 60,
+                'class' => 'form-control',
+                'placeholder' => 'Informe o título'
             )
         ));
 
@@ -48,6 +50,8 @@ class ArticleForm extends Form
             ),
             'attributes' => array(
                 'size' => 60,
+                'class' => 'form-control',
+                'placeholder' => 'Informe o subtítulo'
             )
         ));
 
@@ -55,7 +59,7 @@ class ArticleForm extends Form
             'name' => 'text',
             'type' => 'textarea',
             'options' => array(
-                'label' => 'Texto',
+                'label' => 'Conteúdo',
                 'required' => 'required',
                 'label_attributes' => array(
                     'class' => 'control-label'

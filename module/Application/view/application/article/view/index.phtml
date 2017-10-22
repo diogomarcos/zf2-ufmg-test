@@ -1,9 +1,13 @@
 <div class="jumbotron">
-    <h1><?=$article['title']?></h1>
-    <h2><?=$article['subtitle']?></h2>
+    <h2><?=$article['title']?></h2>
+    <h3><?=$article['subtitle']?></h3>
     <div><?=$article['text']?></div>
     <div>
-        <a class="btn btn-primary" href="<?=$_SERVER['HTTP_REFERER']?>">Voltar</a>
-        <a class="btn btn-success" href="<?=$this->basePath()?>/article/edit/<?=$article['id']?>">Editar</a>
+        <a class="btn btn-success" href="<?=$this->basePath()?>/article/edit/<?=$article['id']?>">
+            <i class="glyphicon glyphicon-edit"></i> &nbsp; Editar
+        </a>
+        <a class="btn btn-primary" href="<?=$_SERVER['HTTP_REFERER']?>">
+            <i class="glyphicon glyphicon-backward"></i> &nbsp; Voltar
+        </a>
     </div>
 </div>

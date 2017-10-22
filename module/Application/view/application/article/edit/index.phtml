@@ -1,5 +1,6 @@
 <div class="jumbotron">
-    <h1>Editar Notícia</h1>
+    <h2>Editar Notícia</h2>
+    <hr class="border-top-color">
     <?php echo $this->partial('flash-message'); ?>
 
     <?php
@@ -26,8 +27,10 @@
         <tr>
             <td>&nbsp;</td>
             <td>
-                <a class="btn btn-primary" href="<?=$_SERVER['HTTP_REFERER']?>">Voltar</a>
-                <?php echo $this->formElement($form->get('submit')); ?>
+                <button type="submit" class="btn btn-primary" name="submit">
+                    <span class="glyphicon glyphicon-edit"></span> &nbsp; Atualizar
+                </button>
+                <a href="<?=$_SERVER['HTTP_REFERER']?>" class="btn btn-large btn-success"><i class="glyphicon glyphicon-backward"></i> &nbsp; Voltar</a>
             </td>
         </tr>
     </table>

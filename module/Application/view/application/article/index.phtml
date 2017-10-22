@@ -1,26 +1,52 @@
 <div class="jumbotron">
-    <h1>Listagem de Notícias</h1>
+    <div class="row">
+        <div class="col-sm-6">
+            <h2>Listagem de Notícias</h2>
+        </div>
+        <div class="col-sm-6 text-right">
+            <a class="btn btn-primary" href="<?=$this->basePath()?>/article/add"><i class="glyphicon glyphicon-plus"></i> Nova Notícia</a>
+            <a class="btn btn-default" href="/article"><i class="glyphicon glyphicon-refresh"></i> Atualizar</a>
+        </div>
+    </div>
     <?php echo $this->partial('flash-message'); ?>
     <table class="table">
         <tr>
-            <td colspan="4">
-                <a class="btn btn-success" href="<?=$this->basePath()?>/article/add">Adicionar</a>
-            </td>
+            <th width="15%">ID</th>
+            <th width="75%">Título</th>
+            <th colspan="2">Ações</th>
         </tr>
-        <tr>
-            <th>ID</th>
-            <th>Título</th>
-            <th>Ver</th>
-            <th>Modificar</th>
-        </tr>
-        <?php foreach($articles as $article){ ?>
-            <tr style="background-color:<?php echo $this->cycle(array("#F0F0F0","#FFFFFF"))->next()?>">
-                <td><?=$article['id']?></td>
-                <td><?=$article['title']?></td>
-                <td><a class="btn btn-success" href="<?=$this->basePath()?>/article/view/<?=$article['id']?>">Ver</a></td>
-                <td><a class="btn btn-primary" href="<?=$this->basePath()?>/article/edit/<?=$article['id']?>">Modificar</a></td>
+        <?php
+        if (!empty($articles)) {
+            foreach ($articles as $article) { ?>
+                <tr style="background-color:<?php echo $this->cycle(array("#F0F0F0", "#FFFFFF"))->next() ?>">
+                    <td><?= $article['id'] ?></td>
+                    <td><?= $article['title'] ?></td>
+                    <td>
+                        <a title="Visualizar notícia" class="btn btn-default btn-sm"
+                           href="<?= $this->basePath() ?>/article/view/<?= $article['id'] ?>">
+                            <i class="glyphicon glyphicon-eye-open text-primary"></i>
+                        </a>
+                    </td>
+                    <td>
+                        <a title="Editar notícia" class="btn btn-default btn-sm"
+                           href="<?= $this->basePath() ?>/article/edit/<?= $article['id'] ?>">
+                            <i class="glyphicon glyphicon-edit text-primary"></i>
+                        </a>
+                    </td>
+                </tr>
+        <?php
+            }
+        } else {
+        ?>
+            <tr>
+                <td colspan="4" align="center">
+                    Por algum motivo, não foi possível buscar os itens do WebService.<br>
+                    Favor entrar em contato com o administrador do sistema!
+                </td>
             </tr>
-        <?php } ?>
+        <?php
+        }
+        ?>
     </table>
 
     <?php echo $this->partial('pager'); ?>

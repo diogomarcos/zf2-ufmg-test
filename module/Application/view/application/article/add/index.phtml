@@ -1,5 +1,6 @@
 <div class="jumbotron">
-    <h1>Cadastrar Notícia</h1>
+    <h2>Cadastrar Notícia</h2>
+    <hr class="border-top-color">
     <?php echo $this->partial('flash-message'); ?>
 
     <?php
@@ -24,10 +25,12 @@
                 <span class="common-error-msg"><?php echo $this->formElementErrors($form->get('text'));?></span></td>
         </tr>
         <tr>
-            <td>&nbsp;</td>
+            <td> </td>
             <td>
-                <a class="btn btn-primary" href="<?=$_SERVER['HTTP_REFERER']?>">Voltar</a>
-                <?php echo $this->formElement($form->get('submit')); ?>
+                <button type="submit" class="btn btn-primary" name="submit">
+                    <span class="glyphicon glyphicon-plus"></span> &nbsp; Salvar
+                </button>
+                <a href="<?=$_SERVER['HTTP_REFERER']?>" class="btn btn-large btn-success"><i class="glyphicon glyphicon-backward"></i> &nbsp; Voltar</a>
             </td>
         </tr>
     </table>
