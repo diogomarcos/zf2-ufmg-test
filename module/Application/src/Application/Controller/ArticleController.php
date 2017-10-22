@@ -37,7 +37,9 @@ class ArticleController extends AbstractActionController
         $articles = $web_service['items'];
         $total = $web_service['total'];
 
-        if (array_key_exists('status', $web_service)) {
+        if (!is_array($web_service)) {
+            $articles = array();
+        } elseif (array_key_exists('status', $web_service)) {
             $articles = array();
         }
 
@@ -80,7 +82,7 @@ class ArticleController extends AbstractActionController
                 if (is_array($web_service) && !empty($web_service)) {
                     $this->flashMessenger()->addMessage(array('success' => 'Notícia adicionada com sucesso.'));
                 } else {
-                    $this->flashMessenger()->addMessage(array('error' => 'Houve um erro ao adicionar a notícia.'));
+                    $this->flashMessenger()->addMessage(array('danger' => 'Houve um erro ao adicionar a notícia.'));
                 }
 
                 return $this->redirect()->toUrl('/article');
@@ -114,6 +116,12 @@ class ArticleController extends AbstractActionController
 
         $web_service = WebService::viewArticle($id);
 
+        if($web_service['status']===500) {
+            return $this->redirect()->toRoute('article', array(
+                'action' => 'index'
+            ));
+        }
+
         return new ViewModel(array(
             'article' => $web_service
         ));
@@ -144,6 +152,20 @@ class ArticleController extends AbstractActionController
 
         $web_service = WebService::viewArticle($id);
 
+        if($web_service['status']===500) {
+            return $this->redirect()->toRoute('article', array(
+                'action' => 'index'
+            ));
+        }
+
+        $tags = '';
+        if (!empty($web_service)) {
+            foreach($web_service['tags'] as $item) {
+                $tags.=$item['name'].',';
+            }
+        }
+        $web_service['tags-string'] = substr_replace($tags,'',-1);
+
         $request = $this->getRequest();
 
         $view = new ViewModel();
@@ -165,7 +187,7 @@ class ArticleController extends AbstractActionController
                 if (is_array($web_service) && !empty($web_service)) {
                     $this->flashMessenger()->addMessage(array('success' => 'Notícia editado com sucesso.'));
                 } else {
-                    $this->flashMessenger()->addMessage(array('error' => 'Houve um erro ao editar a notícia.'));
+                    $this->flashMessenger()->addMessage(array('danger' => 'Houve um erro ao editar a notícia.'));
                 }
 
                 return $this->redirect()->toUrl('/article');

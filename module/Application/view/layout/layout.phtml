@@ -20,7 +20,8 @@ echo $this->doctype(); ?>
                         ->prependStylesheet($this->basePath('css/style.css'))
                         ->prependStylesheet($this->basePath('css/bootstrap-theme.min.css'))
                         ->prependStylesheet($this->basePath('css/bootstrap.min.css'))
-                        ->prependStylesheet($this->basePath('font-awesome/css/font-awesome.min.css')); ?>
+                        ->prependStylesheet($this->basePath('font-awesome/css/font-awesome.min.css'))
+                        ->prependStylesheet($this->basePath('bootstrap-tagsinput/bootstrap-tagsinput.css')); ?>
 
         <!-- Scripts -->
         <?php echo $this->headScript()
@@ -99,6 +100,7 @@ echo $this->doctype(); ?>
                 </div>
             </div>
         </footer>
-        <?php echo $this->inlineScript() ?>
+        <?php echo $this->inlineScript()
+            ->prependFile($this->basePath('bootstrap-tagsinput/bootstrap-tagsinput.min.js')); ?>
     </body>
 </html>

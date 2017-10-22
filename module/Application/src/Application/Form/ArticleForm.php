@@ -74,6 +74,19 @@ class ArticleForm extends Form
         ));
 
         $this->add(array(
+            'name' => 'tags-string',
+            'type' => 'text',
+            'options' => array(
+                'label' => 'Tags'
+            ),
+            'attributes' => array(
+                'class' => 'form-control',
+                'placeholder' => 'Informe uma tag',
+                'data-role' => 'tagsinput'
+            )
+        ));
+
+        $this->add(array(
             'name' => 'submit',
             'attributes' => array(
                 'type' => 'submit',

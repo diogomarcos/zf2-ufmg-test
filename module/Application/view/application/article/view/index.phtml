@@ -3,6 +3,15 @@
     <h3><?=$article['subtitle']?></h3>
     <div><?=$article['text']?></div>
     <div>
+        <span class="badge">Postado em <?=date_format(date_create($article['created_at']),"d/m/Y H:i:s")?></span>
+        <div class="pull-right">
+            <?php foreach($article['tags'] as $value): ?>
+                <span class="label label-success"><?=$value['name']?></span>
+            <?php endforeach; ?>
+        </div>
+    </div>
+    <hr class="border-top-color">
+    <div>
         <a class="btn btn-success" href="<?=$this->basePath()?>/article/edit/<?=$article['id']?>">
             <i class="glyphicon glyphicon-edit"></i> &nbsp; Editar
         </a>
