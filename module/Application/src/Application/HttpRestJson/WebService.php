@@ -187,7 +187,8 @@ class WebService
             $parameters = array(
                 'title' => $form_data->title,
                 'subtitle' => $form_data->subtitle,
-                'text' => $form_data->text
+                'text' => $form_data->text,
+                'tags' => $form_data['tags-string']
             );
 
             $result = self::dispatchRequestAndDecodeResponse(
